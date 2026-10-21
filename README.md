@@ -1,21 +1,30 @@
-# Next.js template
+# Li Ling — Photography portfolio
 
-This is a Next.js template with shadcn/ui.
+Personal photography site built on the shadcn/ui Next.js template (preset `b5rR41Mtnc`).
 
-## Adding components
+## Stack
 
-To add components to your app, run the following command:
+- Next.js 16 + React 19
+- Tailwind CSS 4 + shadcn/ui (base-lyra)
+- Fonts: **Outfit** (body), **Oxanium** (headings)
+
+## Sections
+
+- Introduction
+- Work gallery (placeholder images)
+- Pricing
+- Contact (mailto)
+
+Placeholder image swap list: see `IMAGE_REPLACEMENTS.md`.
+
+## Develop
 
 ```bash
-npx shadcn@latest add button
+pnpm install
+pnpm dev
 ```
 
-This will place the ui components in the `components` directory.
-
-## Using components
-
-To use the components in your app, import them as follows:
-
-```tsx
-import { Button } from "@/components/ui/button";
+```bash
+pnpm build
+pnpm start
 ```
