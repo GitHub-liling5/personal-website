@@ -1,4 +1,7 @@
+"use client"
+
 import Link from "next/link"
+import { useEffect, useState } from "react"
 
 import { site } from "@/lib/site"
 
@@ -10,12 +13,24 @@ const links = [
 ] as const
 
 export function SiteHeader() {
+  const [open, setOpen] = useState(false)
+
+  useEffect(() => {
+    if (!open) return
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false)
+    }
+    window.addEventListener("keydown", onKeyDown)
+    return () => window.removeEventListener("keydown", onKeyDown)
+  }, [open])
+
   return (
     <header className="absolute inset-x-0 top-0 z-20">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-6 md:px-10">
         <Link
           href="#top"
           className="font-heading text-sm tracking-[0.28em] text-white uppercase transition-opacity hover:opacity-80"
+          onClick={() => setOpen(false)}
         >
           {site.name}
         </Link>
@@ -33,13 +48,45 @@ export function SiteHeader() {
             </a>
           ))}
         </nav>
-        <a
-          href={`mailto:${site.email}`}
+        <button
+          type="button"
           className="text-xs tracking-[0.18em] text-white/90 uppercase transition-opacity hover:opacity-70 sm:hidden"
+          aria-expanded={open}
+          aria-controls="mobile-nav"
+          onClick={() => setOpen((value) => !value)}
         >
-          Email
-        </a>
+          {open ? "Close" : "Menu"}
+        </button>
       </div>
+      <nav
+        id="mobile-nav"
+        aria-label="Mobile"
+        hidden={!open}
+        className="border-t border-white/15 bg-black/55 px-6 py-5 backdrop-blur-md sm:hidden"
+      >
+        <ul className="flex flex-col gap-4 text-xs tracking-[0.18em] text-white/90 uppercase">
+          {links.map((link) => (
+            <li key={link.href}>
+              <a
+                href={link.href}
+                className="transition-opacity hover:opacity-70"
+                onClick={() => setOpen(false)}
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+          <li>
+            <a
+              href={`mailto:${site.email}`}
+              className="transition-opacity hover:opacity-70"
+              onClick={() => setOpen(false)}
+            >
+              Email
+            </a>
+          </li>
+        </ul>
+      </nav>
     </header>
   )
 }
