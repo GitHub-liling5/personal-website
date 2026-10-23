@@ -1,4 +1,4 @@
-# Li Ling — Photography portfolio
+# Nora Vale — Photography portfolio
 
 Personal photography site built on the shadcn/ui Next.js template (preset `b5rR41Mtnc`).
 

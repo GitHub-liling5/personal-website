@@ -1,7 +1,7 @@
 export const site = {
-  name: "Li Ling",
+  name: "Nora Vale",
   tagline: "Portraits, places, and quiet light.",
-  email: "860526390@qq.com",
+  email: "hello@example.com",
   intro: {
     title: "About",
     body: [
